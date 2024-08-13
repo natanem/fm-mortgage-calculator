@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Frontend Mentor | Mortgage repayment calculator</title>
+  </head>
+  <body>
+    <main class="main">
+      <div class="container">
+        <div class="card">
+          <div class="card-left">
+            <header class="card-header">
+              <h1 class="card-title">Mortgage Calculator</h1>
+              <button class="clear-button" type="reset">Clear All</button>
+            </header>
+            <form class="form">
+              <div class="form-group">
+                <label for="mortgage_amount">Mortgage Amount</label>
+                <div class="input-box">
+                  <span class="sign">&pound;</span>
+                  <input
+                    type="text"
+                    name="mortgage_amount"
+                    id="mortgage_amount"
+                  />
+                </div>
+                <small class="error hidden">This field is required</small>
+              </div>
+              <div class="form-group">
+                <label for="mortgage_term">Mortgage Term</label>
+                <div class="input-box">
+                  <input type="text" name="mortgage_term" id="mortgage_term" />
+                  <span class="sign">years</span>
+                </div>
+                <small class="error hidden">This field is required</small>
+              </div>
+              <div class="form-group">
+                <label for="interest_rate">Interest Rate</label>
+                <div class="input-box">
+                  <input type="text" name="interest_rate" id="interest_rate" />
+                  <span class="sign">%</span>
+                </div>
+                <small class="error hidden">This field is required</small>
+              </div>
+              <div class="form-group">
+                <div class="radio-label" role="label">Mortgage Type</div>
+                <div class="radio-container">
+                  <input type="radio" name="mortgage_type" id="repayment" />
+                  <label for="repayment">Repayment</label>
+                </div>
+                <div class="radio-container">
+                  <input type="radio" name="mortgage_type" id="interest_only" />
+                  <label for="interest_only">Interest Only</label>
+                </div>
+                <small class="error hidden">This field is required</small>
+              </div>
+
+              <button class="button calc-button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="#133041"
+                    d="M18.75 2.25H5.25a1.5 1.5 0 0 0-1.5 1.5v16.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V3.75a1.5 1.5 0 0 0-1.5-1.5Zm-10.5 16.5a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25Zm0-3.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25ZM12 18.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25ZM12 15a1.125 1.125 0 1 1 0-2.25A1.125 1.125 0 0 1 12 15Zm3.75 3.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25Zm0-3.75a1.125 1.125 0 1 1 0-2.25 1.125 1.125 0 0 1 0 2.25Zm1.5-5.25a.75.75 0 0 1-.75.75h-9a.75.75 0 0 1-.75-.75V6a.75.75 0 0 1 .75-.75h9a.75.75 0 0 1 .75.75v3.75Z"
+                  />
+                </svg>
+                Calculate Repayments
+              </button>
+            </form>
+          </div>
+          <div class="card-right">
+            <div class="content">
+              <div>
+                <img src="./assets/images/illustration-empty.svg" alt="" />
+                <div class="">
+                  <h2>Results Shown Here</h2>
+                  <p>
+                    Complete the form and click “calculate repayments” to see
+                    what your monthly repayments would be.
+                  </p>
+                </div>
+              </div>
+              <div class="results-container">
+                <h2>Your results</h2>
+                <p>
+                  Your results are shown below based on the information you
+                  provided. To adjust the results, edit the form and click
+                  “calculate repayments” again.
+                </p>
+                <div class="results-info-card">
+                  <div class="monthly-payment">
+                    <p>Your monthly repayments</p>
+                    <p class="amount">&pound;1797.74</p>
+                  </div>
+                  <div class="total-payment">
+                    <p>Total you'll repay over the term</p>
+                    <p class="amount">&pound;1797.74</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a
+        >. Coded by
+        <a href="https://www.natanem.com" target="_blank">Natanem</a>.
+      </div>
+    </footer>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
