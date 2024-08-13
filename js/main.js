@@ -14,37 +14,18 @@ const validateInput = (value) => {
   return true;
 };
 
-const calculateResult = () => {
+const calculateResult = (amount, interestRate, term) => {
   const finalAmount =
     ((interestRate / 12) * amount) /
     (1 - (1 + interestRate / 12) ** (-30 * 12));
 
-  //   console.log(finalAmount);
-};
-
-const renderResult = (result) => {
-  const div = document.createElement("div");
-  div.textContent = result;
+  return finalAmount;
 };
 
 const validateForm = (inputEls) => {
-  inputEls.forEach((el) => {
-    if (!el.value) {
-      console.log("element is no value: ", el, !el.value);
-      el.parentElement.nextElementSibling.classList.remove("hidden");
-      el.setAttribute("required", true);
-      return false;
-    } else if (!el.checked) {
-      console.log("element is not checked: ", el, !el.checked);
-      el.parentElement.nextElementSibling.classList.remove("hidden");
-      el.setAttribute("required", true);
-      return false;
-    } else {
-      el.parentElement.nextElementSibling.classList.add("hidden");
-      el.setAttribute("required", false);
-    }
-  });
-
+  for (let el of Array.from(inputEls)) {
+    if (el.type === "text" && el.value == "") return false;
+  }
   return true;
 };
 
@@ -54,15 +35,49 @@ const calcBtn = findElement(".calc-button");
 const clearBtn = findElement(".clear-button");
 const resultsContainer = findElement(".card-right .content");
 
-const mortgageAmountEl = Array.from(inputEls).find(
-  (el) => el.name === "mortgage_amount"
-);
+// const mortgageAmountEl = Array.from(inputEls).find(
+//   (el) => el.name === "mortgage_amount"
+// );
 
-mortgageAmountEl.addEventListener("blur", () => {
-  console.log(mortgageAmountEl.value);
-  mortgageAmountEl.value = new Intl.NumberFormat().format(
-    mortgageAmountEl.value.split(",").join("")
-  );
+// mortgageAmountEl.addEventListener("blur", () => {
+//   mortgageAmountEl.value =
+//     mortgageAmountEl.value &&
+//     new Intl.NumberFormat().format(mortgageAmountEl.value.split(",").join(""));
+// });
+
+const renderResult = (result) => {
+  resultsContainer.innerHTML = `
+     <div class="results-container">
+                <h2>Your results</h2>
+                <p>
+                  Your results are shown below based on the information you
+                  provided. To adjust the results, edit the form and click
+                  “calculate repayments” again.
+                </p>
+                <div class="results-info-card">
+                  <div class="monthly-payment">
+                    <p>Your monthly repayments</p>
+                    <p class="amount">&pound;${result.toFixed(2)}</p>
+                  </div>
+                  <div class="total-payment">
+                    <p>Total you'll repay over the term</p>
+                    <p class="amount">&pound;1797.74</p>
+                  </div>
+                </div>
+              </div>
+  `;
+};
+
+inputEls.forEach((inputEl) => {
+  inputEl.addEventListener("blur", () => {
+    if (inputEl.name === "mortgage_amount") {
+      inputEl.value =
+        inputEl.value &&
+        new Intl.NumberFormat().format(inputEl.value.split(",").join(""));
+    }
+
+    inputEl.setAttribute("required", "");
+  });
 });
 
 clearBtn.addEventListener("click", () => {
@@ -77,10 +92,16 @@ calcBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
   const formData = new FormData(formEl);
-  if (validateForm(inputEls)) return;
-  console.log("here");
-
+  Array.from(inputEls).map((el) => el.setAttribute("required", ""));
+  if (!validateForm(inputEls)) {
+    return;
+  }
   const amount = Number(formData.get("mortgage_amount").split(",").join(""));
   const interestRate = Number(formData.get("interest_rate")) / 100;
   const term = Number(formData.get("mortgage_term"));
+
+  const result = calculateResult(amount, interestRate, term);
+  renderResult(result);
+
+  console.log("here");
 });

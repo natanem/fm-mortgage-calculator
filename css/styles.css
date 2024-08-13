@@ -155,10 +155,16 @@ input:invalid + .sign,
   color: var(--clr-red);
   font-size: 0.8rem;
   font-weight: 700;
+
+  display: none;
 }
 
-.error.hidden {
+/* .error.hidden {
   display: none;
+} */
+
+.input-box:has(input:invalid) + .error {
+  display: block;
 }
 
 .radio-container {
